@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import qiang.envelope.printer.model.Client;
+import qiang.envelope.printer.model.ClientStatus;
 import qiang.envelope.printer.model.EnvelopeType;
 
 /**
@@ -43,6 +44,7 @@ public class TestClientRepository {
         client.setCompany("Test Company");
         client.setContact1("Contact 1");
         client.setAddress("Test Company Address");
+        client.setStatus(ClientStatus.ACTIVE);
         client.setEnvelopeType(ems);
 
         client = clientRepository.save(client);

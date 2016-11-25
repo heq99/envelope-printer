@@ -54,7 +54,7 @@ public class ImportData {
         statement.executeUpdate("INSERT INTO PUBLIC.ENVELOPE_TYPE (ID, TYPE, TEMPLATE) VALUES (2, '顺丰', null)");
         statement.closeOnCompletion();
 
-        String sql = "INSERT INTO PUBLIC.CLIENT (ID, COMPANY, CONTACT_1, CONTACT_2, CONTACT_3, ADDRESS, TELEPHONE_1, TELEPHONE_2, ENVELOPE_TYPE_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PUBLIC.CLIENT (ID, COMPANY, CONTACT_1, CONTACT_2, CONTACT_3, ADDRESS, TELEPHONE_1, TELEPHONE_2, STATUS, ENVELOPE_TYPE_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         conn.setAutoCommit(false);
@@ -82,15 +82,16 @@ public class ImportData {
                 stmt.setString(3, contact1);
                 stmt.setString(4, contact2);
                 stmt.setString(5, contact3);
-                stmt.setString(6, address);
+                stmt.setString(6, address==null ? "" : address);
                 stmt.setString(7, telephone1);
                 stmt.setString(8, telephone2);
+                stmt.setString(9, "ACTIVE");
                 if (envelopeTypeName == null) {
-                    stmt.setObject(9, null);
+                    stmt.setObject(10, null);
                 } else if (envelopeTypeName.equalsIgnoreCase("EMS")) {
-                    stmt.setInt(9, 1);
+                    stmt.setInt(10, 1);
                 } else if (envelopeTypeName.equalsIgnoreCase("顺丰")) {
-                    stmt.setInt(9, 2);
+                    stmt.setInt(10, 2);
                 }
 
                 stmt.addBatch();

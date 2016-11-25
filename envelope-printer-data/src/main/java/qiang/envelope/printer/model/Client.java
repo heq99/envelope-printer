@@ -36,7 +36,11 @@ public class Client implements Serializable {
     @Column(name = "TELEPHONE_2")
     private String telephone2;
 
-    @ManyToOne
+    @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
+    private ClientStatus status;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ENVELOPE_TYPE_ID")
     private EnvelopeType envelopeType;
 
@@ -104,11 +108,33 @@ public class Client implements Serializable {
         this.telephone2 = telephone2;
     }
 
+    public ClientStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ClientStatus status) {
+        this.status = status;
+    }
+
     public EnvelopeType getEnvelopeType() {
         return envelopeType;
     }
 
     public void setEnvelopeType(EnvelopeType envelopeType) {
         this.envelopeType = envelopeType;
+    }
+
+    public String getClientData(String field) {
+        if (field.equalsIgnoreCase("contact")) {
+            return this.contact1;
+        } else if (field.equalsIgnoreCase("company")) {
+            return this.company;
+        } else if (field.equalsIgnoreCase("address")) {
+            return this.address;
+        } else if (field.equalsIgnoreCase("telephone")) {
+            return this.telephone1;
+        } else {
+            return null;
+        }
     }
 }

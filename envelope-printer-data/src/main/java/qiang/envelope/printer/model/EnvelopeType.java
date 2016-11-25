@@ -2,6 +2,7 @@ package qiang.envelope.printer.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Qiang on 06/10/2016.
@@ -18,8 +19,14 @@ public class EnvelopeType implements Serializable {
     @Column(name = "TYPE")
     private String type;
 
-    @Column(name = "TEMPLATE")
-    private String template;
+    @Column(name = "WIDTH")
+    private Long width;
+
+    @Column(name = "HEIGHT")
+    private Long height;
+
+    @OneToMany(mappedBy = "envelopeType", fetch = FetchType.EAGER)
+    private Set<EnvelopeField> envelopeFields;
 
     public Long getId() {
         return id;
@@ -37,11 +44,27 @@ public class EnvelopeType implements Serializable {
         this.type = type;
     }
 
-    public String getTemplate() {
-        return template;
+    public Long getWidth() {
+        return width;
     }
 
-    public void setTemplate(String template) {
-        this.template = template;
+    public void setWidth(Long width) {
+        this.width = width;
+    }
+
+    public Long getHeight() {
+        return height;
+    }
+
+    public void setHeight(Long height) {
+        this.height = height;
+    }
+
+    public Set<EnvelopeField> getEnvelopeFields() {
+        return envelopeFields;
+    }
+
+    public void setEnvelopeFields(Set<EnvelopeField> envelopeFields) {
+        this.envelopeFields = envelopeFields;
     }
 }

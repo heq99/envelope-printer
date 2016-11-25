@@ -1,0 +1,44 @@
+<md-card>
+    <button md-raised-button (click)="addNewClient()" color="primary">新增客户</button>
+</md-card>
+
+<md-card>
+    <div>
+        <button md-button [disabled]="isFirstPage()" (click)="loadClients(firstPageUrl)">第一页</button>
+        <button md-button [disabled]="isFirstPage()" (click)="loadClients(prevPageUrl)">前一页</button>
+        当前页：{{ currentPageNum }}
+        <button md-button [disabled]="isLastPage()" (click)="loadClients(nextPageUrl)">下一页</button>
+        <button md-button [disabled]="isLastPage()" (click)="loadClients(lastPageUrl)">最末页</button>
+
+        <span style="float: right">客户总数：{{ totalClients }}</span>
+    </div>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp client-list-table">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">公司</th>
+            <th class="mdl-data-table__cell--non-numeric">地址</th>
+            <th class="mdl-data-table__cell--non-numeric">联系人1</th>
+            <th class="mdl-data-table__cell--non-numeric">联系人2</th>
+            <th class="mdl-data-table__cell--non-numeric">联系人3</th>
+            <th class="mdl-data-table__cell--non-numeric">电话1</th>
+            <th class="mdl-data-table__cell--non-numeric">电话2</th>
+            <th class="mdl-data-table__cell--non-numeric">信封类型</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let client of clients">
+            <td class="mdl-data-table__cell--non-numeric">
+                <a (click)="goToDetail(client)">{{client.company}}</a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{client.address}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{client.contact1}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{client.contact2}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{client.contact3}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{client.telephone1}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{client.telephone2}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{client.envelopeType}}</td>
+        </tr>
+        </tbody>
+    </table>
+</md-card>
