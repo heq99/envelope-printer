@@ -5,6 +5,8 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import qiang.envelope.printer.model.Client;
 import qiang.envelope.printer.model.EnvelopeField;
@@ -19,6 +21,8 @@ import java.util.List;
  */
 @Component
 public class EnvelopeParser {
+
+    public static final Logger logger = LoggerFactory.getLogger(EnvelopeParser.class);
 
     private final BaseFont baseFont;
     private final Font font;
@@ -36,7 +40,7 @@ public class EnvelopeParser {
 
     public ByteArrayOutputStream generatePDF(List<Client> clients) throws DocumentException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        EnvelopeType envelopeType = clients.get(1).getEnvelopeType();
+        EnvelopeType envelopeType = clients.get(0).getEnvelopeType();
 
         Rectangle pageSize = new Rectangle(millimeterToUserUnit(envelopeType.getWidth()), millimeterToUserUnit(envelopeType.getHeight()));
         Document doc = new Document(pageSize, 0, 0, 0, 0);
@@ -46,6 +50,8 @@ public class EnvelopeParser {
         PdfContentByte cb = writer.getDirectContent();
 
         for (Client client: clients) {
+
+            logger.debug("(" + client.getId() + ") " + client.getCompany() + "   details:");
 
             for (EnvelopeField envelopeField : envelopeType.getEnvelopeFields()) {
 
@@ -59,7 +65,7 @@ public class EnvelopeParser {
                 float w = millimeterToUserUnit(envelopeField.getFieldWidth());
                 float h = millimeterToUserUnit(envelopeField.getFieldHeight());
 
-                System.out.println(fieldName + ":  " + clientData + "  x=" + x + "  y=" + y + "  w=" + w + "  h=" + h);
+                logger.debug(fieldName + ":  " + clientData + "  x=" + x + "  y=" + y + "  w=" + w + "  h=" + h);
 
                 ColumnText ct = new ColumnText(cb);
                 Phrase p = new Phrase(0, clientData, font);
