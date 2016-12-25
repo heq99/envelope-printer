@@ -5,23 +5,24 @@ import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Client} from '../domain-model/client';
-import {ClientListPage} from '../domain-model/client-list';
+import {ClientList} from '../domain-model/client-list';
+import {baseUrl} from "./configuration";
 
 @Injectable()
 export class ClientService {
 
-    private clientUrl = 'http://localhost:8090/clients';
+    private clientUrl = baseUrl + 'clients';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) { }
 
-    getClients(url: string): Promise<ClientListPage> {
+    getClients(url: string): Promise<ClientList> {
         if (url == null) {
             url = this.clientUrl.concat('?size=10');
         }
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json() as ClientListPage)
+            .then(response => response.json() as ClientList)
             .catch(this.handleError);
     }
 
@@ -38,7 +39,6 @@ export class ClientService {
                 .toPromise()
                 .then(() => client)
                 .catch(this.handleError);
-
         } else {
             return this.http.put(client._links.self.href, JSON.stringify(client), {headers: this.headers})
                 .toPromise()

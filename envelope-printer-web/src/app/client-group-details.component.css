@@ -1,0 +1,9 @@
+.client-list-table {
+    width: 100%;
+}
+
+.client-list-td {
+    vertical-align: top;
+    padding: 15px;
+    background-color: gainsboro;
+}

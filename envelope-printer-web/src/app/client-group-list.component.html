@@ -1,0 +1,29 @@
+<md-card>
+    <button md-raised-button (click)="addNewClientGroup()" color="primary">新增客户组</button>
+</md-card>
+
+<md-card>
+    <div>
+        <button md-button [disabled]="isFirstPage()" (click)="loadClientGroups(firstPageUrl)">第一页</button>
+        <button md-button [disabled]="isFirstPage()" (click)="loadClientGroups(prevPageUrl)">前一页</button>
+        当前页: {{ currentPageNum }}
+        <button md-button [disabled]="isLastPage()" (click)="loadClientGroups(nextPageUrl)">下一页</button>
+        <button md-button [disabled]="isLastPage()" (click)="loadClientGroups(lastPageUrl)">最末页</button>
+
+        <span style="float: right">客户组总数：{{ totalClientGroups }}</span>
+    </div>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp client-group-list-table">
+        <thead><tr>
+            <th class="mdl-data-table__cell--non-numeric">客户组名称</th>
+            <th>客户数量</th>
+        </tr></thead>
+        <tbody>
+            <tr *ngFor="let clientGroup of clientGroups">
+                <td class="mdl-data-table__cell--non-numeric">
+                    <a (click)="goToDetail(clientGroup)">{{clientGroup.groupName}}</a>
+                </td>
+                <td>{{clientGroup.numberOfClients}}</td>
+            </tr>
+        </tbody>
+    </table>
+</md-card>

@@ -1,0 +1,12 @@
+<md-card>
+    <md-card-title>{{messageTitle}}</md-card-title>
+    <md-card-content>
+        <p>
+            {{messageContent}}
+        </p>
+    </md-card-content>
+    <md-card-actions>
+        <button md-raised-button color="primary" (click)="saveClientGroup()">保存</button>
+        <button md-raised-button (click)="close()">取消</button>
+    </md-card-actions>
+</md-card>

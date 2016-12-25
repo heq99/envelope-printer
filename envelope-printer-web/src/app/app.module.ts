@@ -8,9 +8,12 @@ import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ClientService } from './services/client.service';
+import { ClientGroupService } from './services/client-group-service';
 import { EnvelopeTypeService } from './services/envelope-type.service';
 import { ClientListComponent } from './client-list.component';
 import { ClientDetailsComponent } from './client-details.component';
+import { ClientGroupListComponent } from "./client-group-list.component";
+import { ClientGroupDetailsComponent } from "./client-group-details.component";
 
 @NgModule({
     imports: [
@@ -29,6 +32,14 @@ import { ClientDetailsComponent } from './client-details.component';
             {
                 path: 'client/:id',
                 component: ClientDetailsComponent
+            },
+            {
+                path: 'clientGroups',
+                component: ClientGroupListComponent
+            },
+            {
+                path: 'clientGroup/:id',
+                component: ClientGroupDetailsComponent
             }
         ]),
         HttpModule,
@@ -37,9 +48,12 @@ import { ClientDetailsComponent } from './client-details.component';
     declarations: [
         AppComponent,
         ClientListComponent,
-        ClientDetailsComponent
+        ClientDetailsComponent,
+        ClientGroupListComponent,
+        ClientGroupDetailsComponent
     ],
-    providers: [ ClientService, EnvelopeTypeService ],
+    // entryComponents: [dialog.component],
+    providers: [ ClientService, ClientGroupService, EnvelopeTypeService ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

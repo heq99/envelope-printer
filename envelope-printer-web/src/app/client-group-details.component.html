@@ -1,0 +1,77 @@
+<div *ngIf="clientGroup">
+    <md-card>
+        <md-card-title>客户组信息</md-card-title>
+        <md-card-content>
+            <form>
+                <div>
+                    <md-input placeholder="客户组名称"
+                              [(ngModel)]="clientGroup.groupName"
+                              name="clientGroupName"
+                              required="true"
+                              style="width: 300px"></md-input>
+                </div>
+                <div style="height: 20px"></div>
+                <table>
+                    <thead><tr>
+                        <th>组内客户</th>
+                        <th></th>
+                        <th>组外客户</th>
+                    </tr></thead>
+                    <tr>
+                        <td class="client-list-td">
+                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp client-list-table">
+                                <thead><tr>
+                                    <th class="mdl-data-table__cell--non-numeric">公司</th>
+                                    <th class="mdl-data-table__cell--non-numeric">地址</th>
+                                    <th class="mdl-data-table__cell--non-numeric"></th>
+                                </tr></thead>
+                                <tbody>
+                                    <tr *ngFor="let client of clients">
+                                        <td class="mdl-data-table__cell--non-numeric">
+                                            {{client.company}}
+                                        </td>
+                                        <td class="mdl-data-table__cell--non-numeric">
+                                            {{client.address}}
+                                        </td>
+                                        <td class="mdl-data-table__cell--non-numeric">
+                                            <md-icon>mode edit</md-icon>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td style="width: 20px">
+                            abc
+                        </td>
+                        <td class="client-list-td">
+                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp client-list-table">
+                                <thead><tr>
+                                    <th class="mdl-data-table__cell--non-numeric">公司</th>
+                                    <th class="mdl-data-table__cell--non-numeric">地址</th>
+                                    <th class="mdl-data-table__cell--non-numeric"></th>
+                                </tr></thead>
+                                <tbody>
+                                <tr *ngFor="let client of clients">
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        {{client.company}}
+                                    </td>
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        {{client.address}}
+                                    </td>
+                                    <td class="mdl-data-table__cell--non-numeric">
+                                        <md-icon>mode edit</md-icon>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button color="primary" (click)="save()">保存</button>
+            <button md-raised-button (click)="goBack()">取消</button>
+        </md-card-actions>
+    </md-card>
+</div>

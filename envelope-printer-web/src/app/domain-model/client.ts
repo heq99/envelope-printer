@@ -1,7 +1,6 @@
 /**
  * Created by Qiang on 29/10/2016.
  */
-import {EnvelopeType} from "./envelope-type";
 
 export class Client {
     company: string;

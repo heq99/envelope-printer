@@ -17,7 +17,6 @@ export class ClientDetailsComponent implements OnInit {
 
     @Input()
     client: Client;
-    action: string;
 
     constructor(
         private clientService: ClientService,
@@ -30,12 +29,10 @@ export class ClientDetailsComponent implements OnInit {
             if (params['id'] == "new") {
                 this.client = new Client();
                 this.client.status = "ACTIVE";
-                this.action = "new";
             } else {
                 let id = +params['id'];
                 this.clientService.getClient(id)
                     .then((client: Client) => this.client = client);
-                this.action = "edit";
             }
         })
 
@@ -43,7 +40,7 @@ export class ClientDetailsComponent implements OnInit {
 
     save(): void {
         this.clientService.saveClient(this.client)
-            .then(() => this.goBack())
+            .then(() => this.goBack());
     }
 
     goBack(): void {

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Client } from './domain-model/client';
-import { ClientListPage } from "./domain-model/client-list";
+import { ClientList } from "./domain-model/client-list";
 import { EnvelopeType } from "./domain-model/envelope-type";
 import { ClientService } from './services/client.service';
 import { EnvelopeTypeService } from './services/envelope-type.service';
@@ -51,32 +51,38 @@ export class ClientListComponent implements OnInit {
 
     loadClients(url: string): void {
         this.clientService.getClients(url)
-            .then((clientListPage: ClientListPage) => {
-                this.clients = clientListPage._embedded.clients;
+            .then((clientList: ClientList) => {
+                this.clients = clientList._embedded.clients;
                 this.clients.forEach(
                     client => this.envelopeTypeService.getEnvelopeType(client._links.envelopeType.href)
                         .then((envelopeType: EnvelopeType) => client.envelopeType = envelopeType.type)
                 );
 
-                console.info(this.clients);
+                this.totalClients = clientList.page.totalElements;
 
-                this.totalClients = clientListPage.page.totalElements;
-
-                this.totalPagesNum = clientListPage.page.totalPages;
-                this.currentPageNum = clientListPage.page.number + 1;
-                this.pageSize = clientListPage.page.size;
-                this.firstPageUrl = clientListPage._links.first.href;
-                if (clientListPage._links.prev == null) {
+                this.totalPagesNum = clientList.page.totalPages;
+                this.currentPageNum = clientList.page.number + 1;
+                this.pageSize = clientList.page.size;
+                if (clientList._links.first == null) {
+                    this.firstPageUrl = null;
+                } else {
+                    this.firstPageUrl = clientList._links.first.href;
+                }
+                if (clientList._links.prev == null) {
                     this.prevPageUrl = null;
                 } else {
-                    this.prevPageUrl = clientListPage._links.prev.href;
+                    this.prevPageUrl = clientList._links.prev.href;
                 }
-                if (clientListPage._links.next == null) {
+                if (clientList._links.next == null) {
                     this.nextPageUrl = null;
                 } else {
-                    this.nextPageUrl = clientListPage._links.next.href;
+                    this.nextPageUrl = clientList._links.next.href;
                 }
-                this.lastPageUrl = clientListPage._links.last.href;
+                if (clientList._links.last == null) {
+                    this.lastPageUrl = null;
+                } else {
+                    this.lastPageUrl = clientList._links.last.href;
+                }
             });
     }
 

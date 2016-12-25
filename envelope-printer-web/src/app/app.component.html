@@ -1,31 +1,31 @@
 <md-sidenav-layout>
-  <md-sidenav #sidenav mode="side">
-    <md-list>
-      <md-list-item>
-        <span routerLink="/clients">客户信息</span>
-      </md-list-item>
-      <md-list-item>
-        <span routerLink="/clients">打印信封</span>
-      </md-list-item>
-      <md-list-item>
-        <span routerLink="/clients">打印历史</span>
-      </md-list-item>
-    </md-list>
-  </md-sidenav>
+    <md-sidenav #sidenav mode="side">
+        <md-list>
+            <md-list-item>
+                <span routerLink="/clients">客户信息</span>
+            </md-list-item>
+            <md-list-item>
+                <span routerLink="/clientGroups">打印信封</span>
+            </md-list-item>
+            <md-list-item>
+                <span routerLink="/clients">打印历史</span>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
 
-  <md-toolbar color="primary">
-    <button md-button class="app-menu-icon-button" (click)="sidenav.toggle()">
-      <md-icon>menu</md-icon>
-    </button>
-    <h3>快递信封打印</h3>
-    <span class="app-toolbar-filler"></span>
-    <button md-button (click)="gotoMenu('/clients')">客户信息</button>
-    <button md-button (click)="gotoMenu('/clients')">打印信封</button>
-    <button md-button (click)="gotoMenu('/clients')">打印历史</button>
-  </md-toolbar>
+    <md-toolbar color="primary">
+        <button md-button class="app-menu-icon-button" (click)="sidenav.toggle()">
+            <md-icon>menu</md-icon>
+        </button>
+        <h3>快递信封打印</h3>
+        <span class="app-toolbar-filler"></span>
+        <button md-button (click)="gotoMenu('/clients')">客户信息</button>
+        <button md-button (click)="gotoMenu('/clientGroups')">打印信封</button>
+        <button md-button (click)="gotoMenu('/clients')">打印历史</button>
+    </md-toolbar>
 
-  <div class="app-content">
-    <router-outlet></router-outlet>
-  </div>
+    <div class="app-content">
+        <router-outlet></router-outlet>
+    </div>
 
 </md-sidenav-layout>

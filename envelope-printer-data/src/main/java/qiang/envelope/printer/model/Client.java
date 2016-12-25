@@ -2,6 +2,7 @@ package qiang.envelope.printer.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Qiang on 26/06/2016.
@@ -43,6 +44,9 @@ public class Client implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ENVELOPE_TYPE_ID")
     private EnvelopeType envelopeType;
+
+    @ManyToMany(mappedBy = "clients")
+    private List<ClientGroup> clientGroups;
 
     public Long getId() {
         return id;
@@ -122,6 +126,14 @@ public class Client implements Serializable {
 
     public void setEnvelopeType(EnvelopeType envelopeType) {
         this.envelopeType = envelopeType;
+    }
+
+    public List<ClientGroup> getClientGroups() {
+        return clientGroups;
+    }
+
+    public void setClientGroups(List<ClientGroup> clientGroups) {
+        this.clientGroups = clientGroups;
     }
 
     public String getClientData(String field) {
