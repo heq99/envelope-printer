@@ -12,7 +12,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 import qiang.envelope.printer.model.Client;
+import qiang.envelope.printer.model.EnvelopeType;
 import qiang.envelope.printer.repositories.ClientRepository;
+import qiang.envelope.printer.repositories.EnvelopeTypeRepository;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -34,6 +36,9 @@ public class TestEnvelopeParser {
     @Autowired
     private EnvelopeParser envelopeParser;
 
+    @Autowired
+    private EnvelopeTypeRepository envelopeTypeRepository;
+
     private File tempFile;
 
     @Before
@@ -53,8 +58,10 @@ public class TestEnvelopeParser {
         Client client = clientRepository.findOne(Long.valueOf(1));
         Assert.assertEquals("建德南方水泥有限公司", client.getCompany());
 
+        EnvelopeType envelopeType = envelopeTypeRepository.findByType("EMS");
+
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            ByteArrayOutputStream os = envelopeParser.generatePDF(client);
+            ByteArrayOutputStream os = envelopeParser.generatePDF(client, envelopeType);
             os.writeTo(fos);
             os.flush();
             os.close();
@@ -79,8 +86,10 @@ public class TestEnvelopeParser {
         clients.add(clientRepository.findOne(Long.valueOf(1)));
         clients.add(clientRepository.findOne(Long.valueOf(2)));
 
+        EnvelopeType envelopeType = envelopeTypeRepository.findByType("EMS");
+
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            ByteArrayOutputStream os = envelopeParser.generatePDF(clients);
+            ByteArrayOutputStream os = envelopeParser.generatePDF(clients, envelopeType);
             os.writeTo(fos);
             os.flush();
             os.close();

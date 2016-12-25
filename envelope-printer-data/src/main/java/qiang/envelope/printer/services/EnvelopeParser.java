@@ -32,15 +32,14 @@ public class EnvelopeParser {
         font = new Font(baseFont, 10f);
     }
 
-    public ByteArrayOutputStream generatePDF(Client client) throws IOException, DocumentException {
+    public ByteArrayOutputStream generatePDF(Client client, EnvelopeType envelopeType) throws IOException, DocumentException {
         List<Client> clients = new ArrayList<>();
         clients.add(client);
-        return generatePDF(clients);
+        return generatePDF(clients, envelopeType);
     }
 
-    public ByteArrayOutputStream generatePDF(List<Client> clients) throws DocumentException {
+    public ByteArrayOutputStream generatePDF(List<Client> clients, EnvelopeType envelopeType) throws DocumentException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        EnvelopeType envelopeType = clients.get(0).getEnvelopeType();
 
         Rectangle pageSize = new Rectangle(millimeterToUserUnit(envelopeType.getWidth()), millimeterToUserUnit(envelopeType.getHeight()));
         Document doc = new Document(pageSize, 0, 0, 0, 0);

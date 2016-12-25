@@ -9,6 +9,8 @@ import {ClientService} from "./services/client.service";
 import {Router} from "@angular/router";
 import {ClientGroupList} from "./domain-model/client-group-list";
 import {ClientList} from "./domain-model/client-list";
+import {EnvelopeTypeService} from "./services/envelope-type.service";
+import {EnvelopeType} from "./domain-model/envelope-type";
 @Component({
     selector: 'client-group-list',
     templateUrl: 'client-group-list.component.html',
@@ -30,6 +32,7 @@ export class ClientGroupListComponent implements OnInit {
     constructor(
         private clientGroupService: ClientGroupService,
         private clientService: ClientService,
+        private envelopeTypeService: EnvelopeTypeService,
         private router: Router,
     ) { }
 
@@ -51,8 +54,12 @@ export class ClientGroupListComponent implements OnInit {
             .then((clientGroupList: ClientGroupList) => {
                 this.clientGroups = clientGroupList._embedded.clientGroups;
                 this.clientGroups.forEach(
-                    clientGroup => this.clientService.getClients(clientGroup._links.clients.href)
-                        .then((clientList: ClientList) => clientGroup.numberOfClients = clientList._embedded.clients.length)
+                    clientGroup => {
+                        this.clientService.getClients(clientGroup._links.clients.href)
+                            .then((clientList: ClientList) => clientGroup.numberOfClients = clientList._embedded.clients.length);
+                        this.envelopeTypeService.getEnvelopeType(clientGroup._links.envelopeType.href)
+                            .then((envelopeType: EnvelopeType) => clientGroup.envelopeType = envelopeType.type);
+                    }
                 );
 
                 this.totalClientGroups = clientGroupList.page.totalElements;

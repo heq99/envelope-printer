@@ -16,6 +16,7 @@
         <thead><tr>
             <th class="mdl-data-table__cell--non-numeric">客户组名称</th>
             <th>客户数量</th>
+            <th class="mdl-data-table__cell--non-numeric">信封类型</th>
         </tr></thead>
         <tbody>
             <tr *ngFor="let clientGroup of clientGroups">
@@ -23,6 +24,9 @@
                     <a (click)="goToDetail(clientGroup)">{{clientGroup.groupName}}</a>
                 </td>
                 <td>{{clientGroup.numberOfClients}}</td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    {{clientGroup.envelopeType}}
+                </td>
             </tr>
         </tbody>
     </table>

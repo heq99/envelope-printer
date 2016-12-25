@@ -53,10 +53,6 @@ export class ClientListComponent implements OnInit {
         this.clientService.getClients(url)
             .then((clientList: ClientList) => {
                 this.clients = clientList._embedded.clients;
-                this.clients.forEach(
-                    client => this.envelopeTypeService.getEnvelopeType(client._links.envelopeType.href)
-                        .then((envelopeType: EnvelopeType) => client.envelopeType = envelopeType.type)
-                );
 
                 this.totalClients = clientList.page.totalElements;
 

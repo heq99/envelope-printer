@@ -19,13 +19,17 @@ public class ClientGroup implements Serializable {
     @Column(name = "GROUP_NAME")
     private String groupName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "CLIENT_GROUP_MAPPING",
             joinColumns = @JoinColumn(name = "CLIENT_GROUP_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "CLIENT_ID", referencedColumnName = "ID")
     )
     private List<Client> clients;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ENVELOPE_TYPE_ID")
+    private EnvelopeType envelopeType;
 
     public Long getId() {
         return id;
@@ -49,5 +53,13 @@ public class ClientGroup implements Serializable {
 
     public void setClients(List<Client> clients) {
         this.clients = clients;
+    }
+
+    public EnvelopeType getEnvelopeType() {
+        return envelopeType;
+    }
+
+    public void setEnvelopeType(EnvelopeType envelopeType) {
+        this.envelopeType = envelopeType;
     }
 }

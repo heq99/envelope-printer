@@ -6,6 +6,7 @@ import {ClientList} from "./client-list";
 export class ClientGroup {
     groupName: string;
     numberOfClients: number;
+    envelopeType: string;
     _links: {
         self: {
             href: string;
@@ -14,6 +15,9 @@ export class ClientGroup {
             href: string;
         },
         clients: {
+            href: string;
+        },
+        envelopeType: {
             href: string;
         }
     }

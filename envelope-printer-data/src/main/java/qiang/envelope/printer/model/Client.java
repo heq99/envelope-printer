@@ -41,10 +41,6 @@ public class Client implements Serializable {
     @Enumerated(EnumType.STRING)
     private ClientStatus status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ENVELOPE_TYPE_ID")
-    private EnvelopeType envelopeType;
-
     @ManyToMany(mappedBy = "clients")
     private List<ClientGroup> clientGroups;
 
@@ -118,14 +114,6 @@ public class Client implements Serializable {
 
     public void setStatus(ClientStatus status) {
         this.status = status;
-    }
-
-    public EnvelopeType getEnvelopeType() {
-        return envelopeType;
-    }
-
-    public void setEnvelopeType(EnvelopeType envelopeType) {
-        this.envelopeType = envelopeType;
     }
 
     public List<ClientGroup> getClientGroups() {

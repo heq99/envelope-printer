@@ -25,7 +25,7 @@ public class EnvelopeType implements Serializable {
     @Column(name = "HEIGHT")
     private Long height;
 
-    @OneToMany(mappedBy = "envelopeType", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "envelopeType", fetch = FetchType.LAZY)
     private Set<EnvelopeField> envelopeFields;
 
     public Long getId() {

@@ -17,19 +17,7 @@ import qiang.envelope.printer.model.EnvelopeType;
 public class TestClientRepository {
 
     @Autowired
-    private EnvelopeTypeRepository envelopeTypeRepository;
-
-    @Autowired
     private ClientRepository clientRepository;
-
-    private EnvelopeType ems;
-    private EnvelopeType shunFeng;
-
-    @Before
-    public void beforeTest() {
-        ems = envelopeTypeRepository.findByType("EMS");
-        shunFeng = envelopeTypeRepository.findByType("顺丰");
-    }
 
     @Test
     public void testInitialDatabase() {
@@ -45,7 +33,6 @@ public class TestClientRepository {
         client.setContact1("Contact 1");
         client.setAddress("Test Company Address");
         client.setStatus(ClientStatus.ACTIVE);
-        client.setEnvelopeType(ems);
 
         client = clientRepository.save(client);
         Assert.assertEquals(320, clientRepository.count());
@@ -56,7 +43,5 @@ public class TestClientRepository {
 
         clientRepository.delete(client);
         Assert.assertEquals(319, clientRepository.count());
-
     }
-
 }

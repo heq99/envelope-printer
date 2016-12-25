@@ -18,9 +18,6 @@ export class Client {
         },
         client: {
             href: string;
-        },
-        envelopeType: {
-            href: string;
         }
     };
 }
