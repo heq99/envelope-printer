@@ -3,12 +3,16 @@
  */
 export class EnvelopeType {
     type: string;
-    template: string;
+    width: number;
+    height: number;
     _links: {
         self: {
             href: string;
         },
         envelopeType: {
+            href: string;
+        },
+        envelopeFields: {
             href: string;
         }
     }

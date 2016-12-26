@@ -7,6 +7,7 @@ import qiang.envelope.printer.model.Client;
 import qiang.envelope.printer.model.EnvelopeType;
 import qiang.envelope.printer.repositories.ClientRepository;
 
+import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class PrintEnvelopeService {
     @Autowired
     private EnvelopeParser envelopeParser;
 
-    public OutputStream printEnvelope(Long[] clientIds, EnvelopeType envelopeType) throws DocumentException {
+    public ByteArrayOutputStream printEnvelope(Long[] clientIds, EnvelopeType envelopeType) throws DocumentException {
         List<Client> clients = new ArrayList<>();
         for (Long id : clientIds) {
             Client client = clientRepository.findOne(id);

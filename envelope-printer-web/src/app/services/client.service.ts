@@ -47,6 +47,12 @@ export class ClientService {
         }
     }
 
+    getClientId(client: Client): number {
+        var url: string = client._links.self.href;
+        var strId: string = url.substring(url.lastIndexOf('/') + 1);
+        return +strId;
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);

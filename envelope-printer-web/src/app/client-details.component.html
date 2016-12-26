@@ -29,6 +29,15 @@
         <md-card-actions>
             <button md-raised-button color="primary" (click)="save()">保存</button>
             <button md-raised-button (click)="goBack()">取消</button>
+            <button md-raised-button color="primary" [md-menu-trigger-for]="printMenu">
+                打印
+            </button>
+            <md-menu #printMenu="mdMenu">
+                <button md-menu-item *ngFor="let envelopeType of envelopeTypes"
+                        (click)="print(client, envelopeType)">
+                    {{envelopeType.type}}信封
+                </button>
+            </md-menu>
         </md-card-actions>
     </md-card>
 </div>

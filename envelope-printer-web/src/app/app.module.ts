@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { ClientService } from './services/client.service';
 import { ClientGroupService } from './services/client-group-service';
 import { EnvelopeTypeService } from './services/envelope-type.service';
+import { PrintService } from "./services/print.service";
 import { ClientListComponent } from './client-list.component';
 import { ClientDetailsComponent } from './client-details.component';
 import { ClientGroupListComponent } from "./client-group-list.component";
@@ -53,7 +54,7 @@ import { ClientGroupDetailsComponent } from "./client-group-details.component";
         ClientGroupDetailsComponent
     ],
     // entryComponents: [dialog.component],
-    providers: [ ClientService, ClientGroupService, EnvelopeTypeService ],
+    providers: [ ClientService, ClientGroupService, EnvelopeTypeService, PrintService ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

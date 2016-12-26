@@ -8,6 +8,9 @@ import qiang.envelope.printer.model.EnvelopeType;
  */
 public interface EnvelopeTypeRepository extends CrudRepository<EnvelopeType, Long> {
 
+    @Override
+    Iterable<EnvelopeType> findAll();
+
     EnvelopeType findByType(String type);
 
 }
