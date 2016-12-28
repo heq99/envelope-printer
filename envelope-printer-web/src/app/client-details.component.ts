@@ -7,9 +7,9 @@ import { Location }                 from '@angular/common';
 
 import { Client } from './domain-model/client';
 import { ClientService } from './services/client.service';
-import {EnvelopeTypeService} from "./services/envelope-type.service";
-import {EnvelopeType} from "./domain-model/envelope-type";
-import {EnvelopeTypeList} from "./domain-model/envelope-type-list";
+import {EnvelopeService} from "./services/envelope.service";
+import {Envelope} from "./domain-model/envelope";
+import {EnvelopeList} from "./domain-model/envelope-list";
 import {PrintService} from "./services/print.service";
 
 @Component({
@@ -22,20 +22,20 @@ export class ClientDetailsComponent implements OnInit {
     @Input()
     client: Client;
 
-    envelopeTypes: EnvelopeType[] = [];
+    envelopes: Envelope[] = [];
 
     constructor(
         private clientService: ClientService,
-        private envelopeTypeService: EnvelopeTypeService,
+        private envelopeService: EnvelopeService,
         private printService: PrintService,
         private route: ActivatedRoute,
         private location: Location
     ) { }
 
     ngOnInit(): void {
-        this.envelopeTypeService.getEnvelopeTypes()
-            .then((envelopeList: EnvelopeTypeList) => {
-                this.envelopeTypes = envelopeList._embedded.envelopeTypes;
+        this.envelopeService.getEnvelopes()
+            .then((envelopeList: EnvelopeList) => {
+                this.envelopes = envelopeList._embedded.envelopes;
             });
         this.route.params.forEach((params: Params) => {
             if (params['id'] == "new") {
@@ -58,9 +58,9 @@ export class ClientDetailsComponent implements OnInit {
         this.location.back();
     }
 
-    print(client: Client, envelopeType: EnvelopeType): void {
+    print(client: Client, envelope: Envelope): void {
         var reader = new FileReader();
-        this.printService.print(this.clientService.getClientId(client), envelopeType.type)
+        this.printService.print(this.clientService.getClientId(client), envelope.name)
             .then((blob: Blob) => reader.readAsDataURL(blob));
         reader.onloadend = function(e) {
             window.open(reader.result, 'PDF');

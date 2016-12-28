@@ -1,11 +1,11 @@
-import {EnvelopeType} from "./envelope-type";
+import {Envelope} from "./envelope";
 /**
  * Created by Qiang on 26/12/2016.
  */
 
-export class EnvelopeTypeList {
+export class EnvelopeList {
     _embedded: {
-        envelopeTypes: EnvelopeType[];
+        envelopes: Envelope[];
     };
     _links: {
         self: {

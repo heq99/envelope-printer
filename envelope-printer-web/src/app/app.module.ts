@@ -9,7 +9,7 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { ClientService } from './services/client.service';
 import { ClientGroupService } from './services/client-group-service';
-import { EnvelopeTypeService } from './services/envelope-type.service';
+import { EnvelopeService } from './services/envelope.service';
 import { PrintService } from "./services/print.service";
 import { ClientListComponent } from './client-list.component';
 import { ClientDetailsComponent } from './client-details.component';
@@ -54,7 +54,7 @@ import { ClientGroupDetailsComponent } from "./client-group-details.component";
         ClientGroupDetailsComponent
     ],
     // entryComponents: [dialog.component],
-    providers: [ ClientService, ClientGroupService, EnvelopeTypeService, PrintService ],
+    providers: [ ClientService, ClientGroupService, EnvelopeService, PrintService ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

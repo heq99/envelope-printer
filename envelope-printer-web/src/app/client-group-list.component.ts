@@ -9,8 +9,8 @@ import {ClientService} from "./services/client.service";
 import {Router} from "@angular/router";
 import {ClientGroupList} from "./domain-model/client-group-list";
 import {ClientList} from "./domain-model/client-list";
-import {EnvelopeTypeService} from "./services/envelope-type.service";
-import {EnvelopeType} from "./domain-model/envelope-type";
+import {EnvelopeService} from "./services/envelope.service";
+import {Envelope} from "./domain-model/envelope";
 @Component({
     selector: 'client-group-list',
     templateUrl: 'client-group-list.component.html',
@@ -32,7 +32,7 @@ export class ClientGroupListComponent implements OnInit {
     constructor(
         private clientGroupService: ClientGroupService,
         private clientService: ClientService,
-        private envelopeTypeService: EnvelopeTypeService,
+        private envelopeService: EnvelopeService,
         private router: Router,
     ) { }
 
@@ -57,8 +57,8 @@ export class ClientGroupListComponent implements OnInit {
                     clientGroup => {
                         this.clientService.getClients(clientGroup._links.clients.href)
                             .then((clientList: ClientList) => clientGroup.numberOfClients = clientList._embedded.clients.length);
-                        this.envelopeTypeService.getEnvelopeType(clientGroup._links.envelopeType.href)
-                            .then((envelopeType: EnvelopeType) => clientGroup.envelopeType = envelopeType.type);
+                        this.envelopeService.getEnvelope(clientGroup._links.envelope.href)
+                            .then((envelope: Envelope) => clientGroup.envelope = envelope.name);
                     }
                 );
 

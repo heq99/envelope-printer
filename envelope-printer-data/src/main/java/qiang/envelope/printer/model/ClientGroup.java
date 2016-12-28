@@ -28,8 +28,8 @@ public class ClientGroup implements Serializable {
     private List<Client> clients;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ENVELOPE_TYPE_ID")
-    private EnvelopeType envelopeType;
+    @JoinColumn(name = "ENVELOPE_ID")
+    private Envelope envelope;
 
     public Long getId() {
         return id;
@@ -55,11 +55,11 @@ public class ClientGroup implements Serializable {
         this.clients = clients;
     }
 
-    public EnvelopeType getEnvelopeType() {
-        return envelopeType;
+    public Envelope getEnvelope() {
+        return envelope;
     }
 
-    public void setEnvelopeType(EnvelopeType envelopeType) {
-        this.envelopeType = envelopeType;
+    public void setEnvelope(Envelope envelope) {
+        this.envelope = envelope;
     }
 }

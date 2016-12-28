@@ -16,8 +16,8 @@ public class EnvelopeField implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ENVELOPE_TYPE_ID")
-    private EnvelopeType envelopeType;
+    @JoinColumn(name = "ENVELOPE_ID")
+    private Envelope envelope;
 
     @Column(name = "FIELD_NAME")
     private String fieldName;
@@ -45,12 +45,12 @@ public class EnvelopeField implements Serializable {
         this.id = id;
     }
 
-    public EnvelopeType getEnvelopeType() {
-        return envelopeType;
+    public Envelope getEnvelope() {
+        return envelope;
     }
 
-    public void setEnvelopeType(EnvelopeType envelopeType) {
-        this.envelopeType = envelopeType;
+    public void setEnvelope(Envelope envelope) {
+        this.envelope = envelope;
     }
 
     public String getFieldName() {

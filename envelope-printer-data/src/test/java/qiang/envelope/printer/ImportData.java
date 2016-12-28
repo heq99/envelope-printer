@@ -1,23 +1,5 @@
 package qiang.envelope.printer;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import qiang.envelope.printer.configuration.ApplicationConfiguration;
-import qiang.envelope.printer.model.Client;
-import qiang.envelope.printer.model.EnvelopeType;
-import qiang.envelope.printer.repositories.ClientRepository;
-
-import javax.persistence.EntityManager;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -75,7 +57,7 @@ public class ImportData {
                 String contact3 = trimQuotes(elements[5]);
                 String telephone1 = trimQuotes(elements[6]);
                 String telephone2 = trimQuotes(elements[7]);
-                String envelopeTypeName = trimQuotes(elements[8]);
+                String envelopeName = trimQuotes(elements[8]);
 
                 stmt.setInt(1, id++);
                 stmt.setString(2, company);
@@ -86,11 +68,11 @@ public class ImportData {
                 stmt.setString(7, telephone1);
                 stmt.setString(8, telephone2);
                 stmt.setString(9, "ACTIVE");
-                if (envelopeTypeName == null) {
+                if (envelopeName == null) {
                     stmt.setObject(10, null);
-                } else if (envelopeTypeName.equalsIgnoreCase("EMS")) {
+                } else if (envelopeName.equalsIgnoreCase("EMS")) {
                     stmt.setInt(10, 1);
-                } else if (envelopeTypeName.equalsIgnoreCase("顺丰")) {
+                } else if (envelopeName.equalsIgnoreCase("顺丰")) {
                     stmt.setInt(10, 2);
                 }
 

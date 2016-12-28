@@ -13,9 +13,9 @@ export class PrintService {
 
     constructor(private http: Http) { }
 
-    print(clientId: number, envelopeType: string): Promise<Blob> {
+    print(clientId: number, envelope: string): Promise<Blob> {
         let body: string = '[' + clientId + ']';
-        return this.http.post(this.printUrl.concat('/', envelopeType), body, {headers: this.headers, responseType: ResponseContentType.Blob})
+        return this.http.post(this.printUrl.concat('/', envelope), body, {headers: this.headers, responseType: ResponseContentType.Blob})
             .toPromise()
             .then((response: Response) => response.blob())
             .catch(this.handleError);

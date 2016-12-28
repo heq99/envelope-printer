@@ -12,9 +12,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 import qiang.envelope.printer.model.Client;
-import qiang.envelope.printer.model.EnvelopeType;
+import qiang.envelope.printer.model.Envelope;
 import qiang.envelope.printer.repositories.ClientRepository;
-import qiang.envelope.printer.repositories.EnvelopeTypeRepository;
+import qiang.envelope.printer.repositories.EnvelopeRepository;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -37,7 +37,7 @@ public class TestEnvelopeParser {
     private EnvelopeParser envelopeParser;
 
     @Autowired
-    private EnvelopeTypeRepository envelopeTypeRepository;
+    private EnvelopeRepository envelopeRepository;
 
     private File tempFile;
 
@@ -58,10 +58,10 @@ public class TestEnvelopeParser {
         Client client = clientRepository.findOne(Long.valueOf(1));
         Assert.assertEquals("建德南方水泥有限公司", client.getCompany());
 
-        EnvelopeType envelopeType = envelopeTypeRepository.findByType("EMS");
+        Envelope envelope = envelopeRepository.findByName("EMS");
 
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            ByteArrayOutputStream os = envelopeParser.generatePDF(client, envelopeType);
+            ByteArrayOutputStream os = envelopeParser.generatePDF(client, envelope);
             os.writeTo(fos);
             os.flush();
             os.close();
@@ -86,10 +86,10 @@ public class TestEnvelopeParser {
         clients.add(clientRepository.findOne(Long.valueOf(1)));
         clients.add(clientRepository.findOne(Long.valueOf(2)));
 
-        EnvelopeType envelopeType = envelopeTypeRepository.findByType("EMS");
+        Envelope envelope = envelopeRepository.findByName("EMS");
 
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            ByteArrayOutputStream os = envelopeParser.generatePDF(clients, envelopeType);
+            ByteArrayOutputStream os = envelopeParser.generatePDF(clients, envelope);
             os.writeTo(fos);
             os.flush();
             os.close();

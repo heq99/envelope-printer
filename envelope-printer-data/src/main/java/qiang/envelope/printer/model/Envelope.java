@@ -8,16 +8,16 @@ import java.util.Set;
  * Created by Qiang on 06/10/2016.
  */
 @Entity
-@Table(name = "ENVELOPE_TYPE")
-public class EnvelopeType implements Serializable {
+@Table(name = "ENVELOPE")
+public class Envelope implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "TYPE")
-    private String type;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "WIDTH")
     private Long width;
@@ -25,7 +25,7 @@ public class EnvelopeType implements Serializable {
     @Column(name = "HEIGHT")
     private Long height;
 
-    @OneToMany(mappedBy = "envelopeType", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "envelope", fetch = FetchType.LAZY)
     private Set<EnvelopeField> envelopeFields;
 
     public Long getId() {
@@ -36,12 +36,12 @@ public class EnvelopeType implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String type) {
+        this.name = type;
     }
 
     public Long getWidth() {

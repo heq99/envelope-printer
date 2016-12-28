@@ -11,7 +11,6 @@ export class Client {
     telephone1: string;
     telephone2: string;
     status: string;
-    envelopeType: string;
     _links: {
         self: {
             href: string;

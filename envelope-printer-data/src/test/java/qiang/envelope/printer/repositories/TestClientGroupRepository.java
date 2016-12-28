@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import qiang.envelope.printer.model.ClientGroup;
-import qiang.envelope.printer.model.EnvelopeType;
+import qiang.envelope.printer.model.Envelope;
 
 /**
  * Created by Qiang on 25/12/2016.
@@ -21,15 +21,15 @@ public class TestClientGroupRepository {
     private ClientGroupRepository clientGroupRepository;
 
     @Autowired
-    private EnvelopeTypeRepository envelopeTypeRepository;
+    private EnvelopeRepository envelopeRepository;
 
-    private EnvelopeType ems;
-    private EnvelopeType shunfeng;
+    private Envelope ems;
+    private Envelope shunfeng;
 
     @Before
     public void beforeTest() {
-        ems = envelopeTypeRepository.findByType("EMS");
-        shunfeng = envelopeTypeRepository.findByType("顺丰");
+        ems = envelopeRepository.findByName("EMS");
+        shunfeng = envelopeRepository.findByName("顺丰");
     }
 
     @Test

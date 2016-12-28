@@ -6,9 +6,7 @@ import { Router } from '@angular/router';
 
 import { Client } from './domain-model/client';
 import { ClientList } from "./domain-model/client-list";
-import { EnvelopeType } from "./domain-model/envelope-type";
 import { ClientService } from './services/client.service';
-import { EnvelopeTypeService } from './services/envelope-type.service';
 import 'material-design-lite/dist/material.indigo-pink.min.css';
 
 
@@ -32,7 +30,6 @@ export class ClientListComponent implements OnInit {
 
     constructor(
         private clientService: ClientService,
-        private envelopeTypeService: EnvelopeTypeService,
         private router: Router
     ) { }
 

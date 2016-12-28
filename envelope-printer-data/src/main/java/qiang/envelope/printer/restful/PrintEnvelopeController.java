@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import qiang.envelope.printer.model.EnvelopeType;
-import qiang.envelope.printer.repositories.EnvelopeTypeRepository;
+import qiang.envelope.printer.model.Envelope;
+import qiang.envelope.printer.repositories.EnvelopeRepository;
 import qiang.envelope.printer.services.PrintEnvelopeService;
 
 import java.io.ByteArrayOutputStream;
@@ -24,19 +24,19 @@ public class PrintEnvelopeController {
     public static final Logger logger = LoggerFactory.getLogger(PrintEnvelopeController.class);
 
     @Autowired
-    private EnvelopeTypeRepository envelopeTypeRepository;
+    private EnvelopeRepository envelopeRepository;
 
     @Autowired
     private PrintEnvelopeService printEnvelopeService;
 
-    @RequestMapping(path = "/print/{envelopeType}", method = RequestMethod.POST)
+    @RequestMapping(path = "/print/{envelope}", method = RequestMethod.POST)
     public ResponseEntity<byte[]> printEnvelopes(
-            @PathVariable(value="envelopeType") String envelopeTypeStr,
+            @PathVariable(value="envelope") String envelopeTypeStr,
             @RequestBody Long[] clientIds) {
 
-        EnvelopeType envelopeType = envelopeTypeRepository.findByType(envelopeTypeStr);
+        Envelope envelope = envelopeRepository.findByName(envelopeTypeStr);
         try {
-            ByteArrayOutputStream os = printEnvelopeService.printEnvelope(clientIds, envelopeType);
+            ByteArrayOutputStream os = printEnvelopeService.printEnvelope(clientIds, envelope);
             byte[] bytes = os.toByteArray();
 
             HttpHeaders headers = new HttpHeaders();

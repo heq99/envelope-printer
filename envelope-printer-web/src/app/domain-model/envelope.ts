@@ -1,15 +1,15 @@
 /**
  * Created by Qiang on 25/10/2016.
  */
-export class EnvelopeType {
-    type: string;
+export class Envelope {
+    name: string;
     width: number;
     height: number;
     _links: {
         self: {
             href: string;
         },
-        envelopeType: {
+        envelope: {
             href: string;
         },
         envelopeFields: {

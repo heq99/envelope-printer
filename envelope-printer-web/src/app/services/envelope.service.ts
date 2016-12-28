@@ -5,29 +5,29 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { EnvelopeType } from '../domain-model/envelope-type';
+import { Envelope } from '../domain-model/envelope';
 import {baseUrl} from "./configuration";
-import {EnvelopeTypeList} from "../domain-model/envelope-type-list";
+import {EnvelopeList} from "../domain-model/envelope-list";
 
 @Injectable()
-export class EnvelopeTypeService {
+export class EnvelopeService {
 
-    private envelopeTypeUrl = baseUrl + 'envelopeTypes';
+    private envelopeUrl = baseUrl + 'envelopes';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) { }
 
-    getEnvelopeTypes(): Promise<EnvelopeTypeList> {
-        return this.http.get(this.envelopeTypeUrl)
+    getEnvelopes(): Promise<EnvelopeList> {
+        return this.http.get(this.envelopeUrl)
             .toPromise()
-            .then(response => response.json() as EnvelopeTypeList)
+            .then(response => response.json() as EnvelopeList)
             .catch(this.handleError);
     }
 
-    getEnvelopeType(url: string): Promise<EnvelopeType> {
+    getEnvelope(url: string): Promise<Envelope> {
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json() as EnvelopeType)
+            .then(response => response.json() as Envelope)
             .catch(this.handleError);
     }
 

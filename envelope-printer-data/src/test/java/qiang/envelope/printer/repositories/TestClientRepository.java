@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import qiang.envelope.printer.model.Client;
 import qiang.envelope.printer.model.ClientStatus;
-import qiang.envelope.printer.model.EnvelopeType;
 
 /**
  * Created by Qiang on 13/10/2016.

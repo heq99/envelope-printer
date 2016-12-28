@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import qiang.envelope.printer.model.Client;
+import qiang.envelope.printer.model.Envelope;
 import qiang.envelope.printer.model.EnvelopeField;
-import qiang.envelope.printer.model.EnvelopeType;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -32,16 +32,16 @@ public class EnvelopeParser {
         font = new Font(baseFont, 10f);
     }
 
-    public ByteArrayOutputStream generatePDF(Client client, EnvelopeType envelopeType) throws IOException, DocumentException {
+    public ByteArrayOutputStream generatePDF(Client client, Envelope envelope) throws IOException, DocumentException {
         List<Client> clients = new ArrayList<>();
         clients.add(client);
-        return generatePDF(clients, envelopeType);
+        return generatePDF(clients, envelope);
     }
 
-    public ByteArrayOutputStream generatePDF(List<Client> clients, EnvelopeType envelopeType) throws DocumentException {
+    public ByteArrayOutputStream generatePDF(List<Client> clients, Envelope envelope) throws DocumentException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-        Rectangle pageSize = new Rectangle(millimeterToUserUnit(envelopeType.getWidth()), millimeterToUserUnit(envelopeType.getHeight()));
+        Rectangle pageSize = new Rectangle(millimeterToUserUnit(envelope.getWidth()), millimeterToUserUnit(envelope.getHeight()));
         Document doc = new Document(pageSize, 0, 0, 0, 0);
         PdfWriter writer = PdfWriter.getInstance(doc, outputStream);
         doc.open();
@@ -52,7 +52,7 @@ public class EnvelopeParser {
 
             logger.debug("(" + client.getId() + ") " + client.getCompany() + "   details:");
 
-            for (EnvelopeField envelopeField : envelopeType.getEnvelopeFields()) {
+            for (EnvelopeField envelopeField : envelope.getEnvelopeFields()) {
 
                 String fieldName = envelopeField.getFieldName();
                 String clientData = client.getClientData(fieldName);
