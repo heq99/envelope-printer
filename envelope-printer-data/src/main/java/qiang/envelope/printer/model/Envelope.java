@@ -25,6 +25,9 @@ public class Envelope implements Serializable {
     @Column(name = "HEIGHT")
     private Long height;
 
+    @Column(name = "IMAGE_FILE_NAME")
+    private String imageFileName;
+
     @OneToMany(mappedBy = "envelope", fetch = FetchType.LAZY)
     private Set<EnvelopeField> envelopeFields;
 
@@ -66,5 +69,13 @@ public class Envelope implements Serializable {
 
     public void setEnvelopeFields(Set<EnvelopeField> envelopeFields) {
         this.envelopeFields = envelopeFields;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }

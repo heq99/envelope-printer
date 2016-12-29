@@ -5,6 +5,7 @@ export class Envelope {
     name: string;
     width: number;
     height: number;
+    imageFileName: string;
     _links: {
         self: {
             href: string;

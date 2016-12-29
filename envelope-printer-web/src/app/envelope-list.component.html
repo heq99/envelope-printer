@@ -1,0 +1,10 @@
+<md-card *ngFor="let envelope of envelopes">
+    <md-card-title>{{envelope.name}} 信封</md-card-title>
+    <img md-card-image src="/public/images/envelopes/{{envelope.imageFileName}}" class="envelope-list-image"/>
+    <md-card-content>
+        长：{{envelope.width}}mm <br/> 宽：{{envelope.height}}mm
+    </md-card-content>
+    <md-card-actions>
+        <button md-raised-button color="primary">设置</button>
+    </md-card-actions>
+</md-card>

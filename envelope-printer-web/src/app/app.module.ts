@@ -15,6 +15,7 @@ import { ClientListComponent } from './client-list.component';
 import { ClientDetailsComponent } from './client-details.component';
 import { ClientGroupListComponent } from "./client-group-list.component";
 import { ClientGroupDetailsComponent } from "./client-group-details.component";
+import { EnvelopeListComponent } from "./envelope-list.component";
 
 @NgModule({
     imports: [
@@ -41,6 +42,10 @@ import { ClientGroupDetailsComponent } from "./client-group-details.component";
             {
                 path: 'clientGroup/:id',
                 component: ClientGroupDetailsComponent
+            },
+            {
+                path: 'envelopes',
+                component: EnvelopeListComponent
             }
         ]),
         HttpModule,
@@ -51,7 +56,8 @@ import { ClientGroupDetailsComponent } from "./client-group-details.component";
         ClientListComponent,
         ClientDetailsComponent,
         ClientGroupListComponent,
-        ClientGroupDetailsComponent
+        ClientGroupDetailsComponent,
+        EnvelopeListComponent
     ],
     // entryComponents: [dialog.component],
     providers: [ ClientService, ClientGroupService, EnvelopeService, PrintService ],

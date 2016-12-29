@@ -5,10 +5,10 @@
                 <span routerLink="/clients">客户信息</span>
             </md-list-item>
             <md-list-item>
-                <span routerLink="/clientGroups">打印信封</span>
+                <span routerLink="/clientGroups">客户组管理</span>
             </md-list-item>
             <md-list-item>
-                <span routerLink="/clients">打印历史</span>
+                <span routerLink="/envelopes">信封设置</span>
             </md-list-item>
         </md-list>
     </md-sidenav>
@@ -20,8 +20,8 @@
         <h3>快递信封打印</h3>
         <span class="app-toolbar-filler"></span>
         <button md-button (click)="gotoMenu('/clients')">客户信息</button>
-        <button md-button (click)="gotoMenu('/clientGroups')">打印信封</button>
-        <button md-button (click)="gotoMenu('/clients')">打印历史</button>
+        <button md-button (click)="gotoMenu('/clientGroups')">客户组管理</button>
+        <button md-button (click)="gotoMenu('/envelopes')">信封设置</button>
     </md-toolbar>
 
     <div class="app-content">
