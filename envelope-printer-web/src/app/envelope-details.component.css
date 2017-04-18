@@ -1,0 +1,3 @@
+.envelope-area {
+    background-image: url("/public/envelope/{{envelope.name}}");
+}

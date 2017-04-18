@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import '@angular/material/core/theming/prebuilt/indigo-pink.css';
+import '@angular/material/prebuilt-themes/indigo-pink.css';
 import 'material-design-icons/iconfont/material-icons.css'
 import '../../public/css/styles.css';
 

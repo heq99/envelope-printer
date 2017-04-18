@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-import { MaterialModule } from '@angular/material';
+import { MdSidenavModule, MdInputModule, MdButtonModule, MdMenuModule, MdListModule, MdIconModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ClientService } from './services/client.service';
@@ -16,10 +17,12 @@ import { ClientDetailsComponent } from './client-details.component';
 import { ClientGroupListComponent } from "./client-group-list.component";
 import { ClientGroupDetailsComponent } from "./client-group-details.component";
 import { EnvelopeListComponent } from "./envelope-list.component";
+import { EnvelopeDetailsComponent } from "./envelope-details.component";
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         RouterModule.forRoot([
             {
@@ -46,10 +49,19 @@ import { EnvelopeListComponent } from "./envelope-list.component";
             {
                 path: 'envelopes',
                 component: EnvelopeListComponent
+            },
+            {
+                path: 'envelope/:id',
+                component: EnvelopeDetailsComponent
             }
         ]),
         HttpModule,
-        MaterialModule.forRoot()
+        MdSidenavModule,
+        MdInputModule,
+        MdButtonModule,
+        MdMenuModule,
+        MdListModule,
+        MdIconModule
     ],
     declarations: [
         AppComponent,
@@ -57,7 +69,8 @@ import { EnvelopeListComponent } from "./envelope-list.component";
         ClientDetailsComponent,
         ClientGroupListComponent,
         ClientGroupDetailsComponent,
-        EnvelopeListComponent
+        EnvelopeListComponent,
+        EnvelopeDetailsComponent
     ],
     // entryComponents: [dialog.component],
     providers: [ ClientService, ClientGroupService, EnvelopeService, PrintService ],

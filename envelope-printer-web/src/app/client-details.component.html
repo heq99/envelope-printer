@@ -3,33 +3,33 @@
         <md-card-title>客户信息</md-card-title>
         <md-card-content>
             <form>
-                <div>
-                    <md-input placeholder="公司" [(ngModel)]="client.company" name="company" required="true" style="width: 100%"></md-input>
-                </div>
-                <div>
-                    <md-input placeholder="地址" [(ngModel)]="client.address" name="address" required="true" style="width: 100%"></md-input>
-                </div>
-                <div>
-                    <md-input placeholder="联系人1" [(ngModel)]="client.contact1" name="contact1" style="width: 50%"></md-input>
-                </div>
-                <div>
-                    <md-input placeholder="联系人2" [(ngModel)]="client.contact2" name="contact2" style="width: 50%"></md-input>
-                </div>
-                <div>
-                    <md-input placeholder="联系人3" [(ngModel)]="client.contact3" name="contact3" style="width: 50%"></md-input>
-                </div>
-                <div>
-                    <md-input placeholder="电话1" [(ngModel)]="client.telephone1" name="telephone1" style="width: 50%"></md-input>
-                </div>
-                <div>
-                    <md-input placeholder="电话2" [(ngModel)]="client.telephone2" name="telephone2" style="width: 50%"></md-input>
-                </div>
+                <md-input-container>
+                    <input mdInput placeholder="公司" [(ngModel)]="client.company" name="company" required="true" style="width: 100%">
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput placeholder="地址" [(ngModel)]="client.address" name="address" required="true" style="width: 100%">
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput placeholder="联系人1" [(ngModel)]="client.contact1" name="contact1" style="width: 50%">
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput placeholder="联系人2" [(ngModel)]="client.contact2" name="contact2" style="width: 50%">
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput placeholder="联系人3" [(ngModel)]="client.contact3" name="contact3" style="width: 50%">
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput placeholder="电话1" [(ngModel)]="client.telephone1" name="telephone1" style="width: 50%">
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput placeholder="电话2" [(ngModel)]="client.telephone2" name="telephone2" style="width: 50%">
+                </md-input-container>
             </form>
         </md-card-content>
         <md-card-actions>
             <button md-raised-button color="primary" (click)="save()">保存</button>
             <button md-raised-button (click)="goBack()">取消</button>
-            <button md-raised-button color="accent" [md-menu-trigger-for]="printMenu">
+            <button md-raised-button color="accent" [mdMenuTriggerFor]="printMenu">
                 打印
             </button>
             <md-menu #printMenu="mdMenu">

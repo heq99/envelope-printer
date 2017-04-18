@@ -57,7 +57,7 @@ export class ClientGroupListComponent implements OnInit {
                     clientGroup => {
                         this.clientService.getClients(clientGroup._links.clients.href)
                             .then((clientList: ClientList) => clientGroup.numberOfClients = clientList._embedded.clients.length);
-                        this.envelopeService.getEnvelope(clientGroup._links.envelope.href)
+                        this.envelopeService.getEnvelopeByName(clientGroup._links.envelope.href)
                             .then((envelope: Envelope) => clientGroup.envelope = envelope.name);
                     }
                 );

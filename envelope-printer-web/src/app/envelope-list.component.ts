@@ -31,4 +31,9 @@ export class EnvelopeListComponent implements OnInit {
                 this.envelopes = envelopeList._embedded.envelopes;
             });
     }
+
+    goToDetails(envelope: Envelope): void {
+        let id = envelope._links.self.href.substring(envelope._links.self.href.lastIndexOf('/')+1);
+        this.router.navigate(['/envelope', id]);
+    }
 }

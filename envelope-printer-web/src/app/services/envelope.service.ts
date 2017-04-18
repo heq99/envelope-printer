@@ -24,7 +24,14 @@ export class EnvelopeService {
             .catch(this.handleError);
     }
 
-    getEnvelope(url: string): Promise<Envelope> {
+    getEnvelopeById(id: number): Promise<Envelope> {
+        return this.http.get(this.envelopeUrl.concat('/', id.toString()))
+            .toPromise()
+            .then(response => response.json() as Envelope)
+            .catch(this.handleError);
+    }
+
+    getEnvelopeByName(url: string): Promise<Envelope> {
         return this.http.get(url)
             .toPromise()
             .then(response => response.json() as Envelope)

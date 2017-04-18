@@ -1,4 +1,4 @@
-<md-sidenav-layout>
+<md-sidenav-container>
     <md-sidenav #sidenav mode="side">
         <md-list>
             <md-list-item>
@@ -17,7 +17,7 @@
         <button md-button class="app-menu-icon-button" (click)="sidenav.toggle()">
             <md-icon>menu</md-icon>
         </button>
-        <h3>快递信封打印</h3>
+        快递信封打印
         <span class="app-toolbar-filler"></span>
         <button md-button (click)="gotoMenu('/clients')">客户信息</button>
         <button md-button (click)="gotoMenu('/clientGroups')">客户组管理</button>
@@ -28,4 +28,4 @@
         <router-outlet></router-outlet>
     </div>
 
-</md-sidenav-layout>
+</md-sidenav-container>

@@ -3,13 +3,14 @@
         <md-card-title>客户组信息</md-card-title>
         <md-card-content>
             <form>
-                <div>
-                    <md-input placeholder="客户组名称"
+                <md-input-container>
+                    <input mdInput
+                              placeholder="客户组名称"
                               [(ngModel)]="clientGroup.groupName"
                               name="clientGroupName"
                               required="true"
-                              style="width: 300px"></md-input>
-                </div>
+                              style="width: 300px">
+                </md-input-container>
                 <div style="height: 20px"></div>
                 <table>
                     <thead><tr>

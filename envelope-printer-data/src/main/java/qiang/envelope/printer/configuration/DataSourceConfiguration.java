@@ -27,7 +27,7 @@ public class DataSourceConfiguration {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:tcp://192.168.0.136:9092/~/envelope/envelope");
+        dataSource.setUrl("jdbc:h2:tcp://localhost/~/envelope/envelope");
         dataSource.setUsername("envelope");
         dataSource.setPassword("password");
         return dataSource;
