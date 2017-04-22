@@ -5,7 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-import { MdSidenavModule, MdInputModule, MdButtonModule, MdMenuModule, MdListModule, MdIconModule } from '@angular/material';
+import { MdSidenavModule, MdToolbarModule, MdInputModule, MdCardModule,
+         MdButtonModule, MdMenuModule, MdListModule, MdIconModule
+       } from '@angular/material';
+
+import { AgGridModule } from "ag-grid-angular/main";
+
 
 import { AppComponent } from './app.component';
 import { ClientService } from './services/client.service';
@@ -24,6 +29,7 @@ import { EnvelopeDetailsComponent } from "./envelope-details.component";
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        AgGridModule.withComponents([]),
         RouterModule.forRoot([
             {
                 path: '',
@@ -57,7 +63,9 @@ import { EnvelopeDetailsComponent } from "./envelope-details.component";
         ]),
         HttpModule,
         MdSidenavModule,
+        MdToolbarModule,
         MdInputModule,
+        MdCardModule,
         MdButtonModule,
         MdMenuModule,
         MdListModule,

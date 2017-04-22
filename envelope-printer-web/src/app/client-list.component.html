@@ -13,28 +13,10 @@
         <span style="float: right">客户总数：{{ totalClients }}</span>
     </div>
 
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp client-list-table">
-        <thead><tr>
-            <th class="mdl-data-table__cell--non-numeric">公司</th>
-            <th class="mdl-data-table__cell--non-numeric">地址</th>
-            <th class="mdl-data-table__cell--non-numeric">联系人1</th>
-            <th class="mdl-data-table__cell--non-numeric">联系人2</th>
-            <th class="mdl-data-table__cell--non-numeric">联系人3</th>
-            <th class="mdl-data-table__cell--non-numeric">电话1</th>
-            <th class="mdl-data-table__cell--non-numeric">电话2</th>
-        </tr></thead>
-        <tbody>
-        <tr *ngFor="let client of clients">
-            <td class="mdl-data-table__cell--non-numeric">
-                <a (click)="goToDetail(client)">{{client.company}}</a>
-            </td>
-            <td class="mdl-data-table__cell--non-numeric">{{client.address}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{client.contact1}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{client.contact2}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{client.contact3}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{client.telephone1}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{client.telephone2}}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div style="width: 100%;">
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                         [gridOptions]="gridOptions"
+                         (cellClicked)='onCellClicked($event)'>
+        </ag-grid-angular>
+    </div>
 </md-card>

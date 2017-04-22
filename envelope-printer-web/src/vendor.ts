@@ -6,8 +6,13 @@ import '@angular/common';
 import '@angular/http';
 import '@angular/router';
 import '@angular/material';
-import 'material-design-lite';
 // RxJS
 import 'rxjs';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
+
+// ag-grid
+import 'ag-grid/dist/styles/ag-grid.css';
+import 'ag-grid/dist/styles/theme-fresh.css';
+
+import 'ag-grid-angular/main';

@@ -4,11 +4,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { GridOptions } from 'ag-grid';
+
 import { Client } from './domain-model/client';
 import { ClientList } from "./domain-model/client-list";
 import { ClientService } from './services/client.service';
-import 'material-design-lite/dist/material.indigo-pink.min.css';
-
 
 @Component({
     selector: 'client-list',
@@ -16,6 +16,8 @@ import 'material-design-lite/dist/material.indigo-pink.min.css';
     styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
+
+    private gridOptions: GridOptions = {};
 
     clients: Client[] = [];
     totalClients: number;
@@ -31,10 +33,18 @@ export class ClientListComponent implements OnInit {
     constructor(
         private clientService: ClientService,
         private router: Router
-    ) { }
+    ) {
+        this.gridOptions = {};
+        this.gridOptions.columnDefs = this.columnDefs;
+        this.gridOptions.rowData = [];
+    }
 
     ngOnInit(): void {
         this.loadClients(null);
+    }
+
+    onCellClicked(event: any) {
+        this.goToDetail(event.data);
     }
 
     goToDetail(client: Client): void {
@@ -50,6 +60,9 @@ export class ClientListComponent implements OnInit {
         this.clientService.getClients(url)
             .then((clientList: ClientList) => {
                 this.clients = clientList._embedded.clients;
+                this.gridOptions.api.setRowData(this.clients);
+                this.gridOptions.columnApi.autoSizeColumns(["company","address"]);
+                this.gridOptions.api.sizeColumnsToFit();
 
                 this.totalClients = clientList.page.totalElements;
 
@@ -87,4 +100,37 @@ export class ClientListComponent implements OnInit {
         return this.currentPageNum == this.totalPagesNum;
     }
 
+    private columnDefs = [
+        {
+            headerName: "公司",
+            field: "company",
+            cellRenderer: function(params:any) {
+                return '<b>' + params.value + '</b>';
+            }
+        },
+        {
+            headerName: "地址",
+            field: "address"
+        },
+        {
+            headerName: "联系人1",
+            field: "contact1"
+        },
+        {
+            headerName: "联系人2",
+            field: "contact2"
+        },
+        {
+            headerName: "联系人3",
+            field: "contact3"
+        },
+        {
+            headerName: "电话1",
+            field: "telephone1"
+        },
+        {
+            headerName: "电话2",
+            field: "telephone2"
+        }
+    ];
 }

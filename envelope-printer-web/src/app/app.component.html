@@ -1,6 +1,6 @@
 <md-sidenav-container>
     <md-sidenav #sidenav mode="side">
-        <md-list>
+        <md-nav-list>
             <md-list-item>
                 <span routerLink="/clients">客户信息</span>
             </md-list-item>
@@ -10,18 +10,22 @@
             <md-list-item>
                 <span routerLink="/envelopes">信封设置</span>
             </md-list-item>
-        </md-list>
+        </md-nav-list>
     </md-sidenav>
 
     <md-toolbar color="primary">
-        <button md-button class="app-menu-icon-button" (click)="sidenav.toggle()">
-            <md-icon>menu</md-icon>
-        </button>
-        快递信封打印
+        <span>
+            <button md-button class="app-menu-icon-button" (click)="sidenav.toggle()">
+                <md-icon>menu</md-icon>
+            </button>
+            快递信封打印
+        </span>
         <span class="app-toolbar-filler"></span>
-        <button md-button (click)="gotoMenu('/clients')">客户信息</button>
-        <button md-button (click)="gotoMenu('/clientGroups')">客户组管理</button>
-        <button md-button (click)="gotoMenu('/envelopes')">信封设置</button>
+        <span>
+            <button md-button (click)="gotoMenu('/clients')">客户信息</button>
+            <button md-button (click)="gotoMenu('/clientGroups')">客户组管理</button>
+            <button md-button (click)="gotoMenu('/envelopes')">信封设置</button>
+        </span>
     </md-toolbar>
 
     <div class="app-content">
