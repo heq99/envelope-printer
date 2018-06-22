@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import qiang.envelope.printer.model.Envelope;
 
@@ -12,6 +14,7 @@ import qiang.envelope.printer.model.Envelope;
  * Created by Qiang on 13/10/2016.
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest
 @DataJpaTest
 public class TestEnvelopeRepository {
 

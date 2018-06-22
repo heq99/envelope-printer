@@ -8,8 +8,10 @@ import qiang.envelope.printer.model.Envelope;
 import qiang.envelope.printer.repositories.ClientRepository;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Qiang on 26/11/2016.
@@ -23,11 +25,13 @@ public class PrintEnvelopeService {
     @Autowired
     private EnvelopeParser envelopeParser;
 
-    public ByteArrayOutputStream printEnvelope(Long[] clientIds, Envelope envelope) throws DocumentException {
+    public ByteArrayOutputStream printEnvelope(Long[] clientIds, Envelope envelope) throws IOException, DocumentException {
         List<Client> clients = new ArrayList<>();
         for (Long id : clientIds) {
-            Client client = clientRepository.findOne(id);
-            clients.add(client);
+            Optional<Client> client = clientRepository.findById(id);
+            if (client.isPresent()) {
+                clients.add(client.get());
+            }
         }
         return envelopeParser.generatePDF(clients, envelope);
     }

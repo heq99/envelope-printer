@@ -5,15 +5,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import qiang.envelope.printer.model.ClientGroup;
 import qiang.envelope.printer.model.Envelope;
+
+import java.util.Optional;
 
 /**
  * Created by Qiang on 25/12/2016.
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest
 @DataJpaTest
 public class TestClientGroupRepository {
 
@@ -35,11 +40,11 @@ public class TestClientGroupRepository {
     @Test
     public void testClientGroupRead() {
 
-        ClientGroup clientGroupEms = clientGroupRepository.findOne(Long.valueOf(1));
-        Assert.assertEquals(34, clientGroupEms.getClients().size());
+        Optional<ClientGroup> clientGroupEms = clientGroupRepository.findById(Long.valueOf(1));
+        Assert.assertEquals(34, clientGroupEms.get().getClients().size());
 
-        ClientGroup clientGroupShunfeng = clientGroupRepository.findOne(Long.valueOf(2));
-        Assert.assertEquals(278, clientGroupShunfeng.getClients().size());
+        Optional<ClientGroup> clientGroupShunfeng = clientGroupRepository.findById(Long.valueOf(2));
+        Assert.assertEquals(278, clientGroupShunfeng.get().getClients().size());
     }
     
 }

@@ -8,9 +8,14 @@ import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import qiang.envelope.printer.Application;
+import qiang.envelope.printer.configuration.ApplicationConfiguration;
 import qiang.envelope.printer.model.Client;
 import qiang.envelope.printer.model.Envelope;
 import qiang.envelope.printer.repositories.ClientRepository;
@@ -21,13 +26,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Qiang on 21/11/2016.
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
 @DataJpaTest
-@ComponentScan
+//@ContextConfiguration(classes=ApplicationConfiguration.class)
 public class TestEnvelopeParser {
 
     @Autowired
@@ -55,13 +62,13 @@ public class TestEnvelopeParser {
     @Test
     public void testSingleClientProduceEnvelopePDF() throws IOException, DocumentException {
 
-        Client client = clientRepository.findOne(Long.valueOf(1));
-        Assert.assertEquals("建德南方水泥有限公司", client.getCompany());
+        Optional<Client> client = clientRepository.findById(Long.valueOf(1));
+        Assert.assertEquals("建德南方水泥有限公司", client.get().getCompany());
 
         Envelope envelope = envelopeRepository.findByName("EMS");
 
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-            ByteArrayOutputStream os = envelopeParser.generatePDF(client, envelope);
+            ByteArrayOutputStream os = envelopeParser.generatePDF(client.get(), envelope);
             os.writeTo(fos);
             os.flush();
             os.close();
@@ -73,8 +80,8 @@ public class TestEnvelopeParser {
             TextExtractionStrategy strategy = parser.processContent(1, new SimpleTextExtractionStrategy());
             String result = strategy.getResultantText();
 
-            Assert.assertTrue(result.contains(client.getAddress()));
-            Assert.assertTrue(result.contains(client.getCompany()));
+            Assert.assertTrue(result.contains(client.get().getAddress()));
+            Assert.assertTrue(result.contains(client.get().getCompany()));
 
             reader.close();
         }
@@ -83,8 +90,8 @@ public class TestEnvelopeParser {
     @Test
     public void testMultiClientsProduceEnvelopePDF() throws DocumentException, IOException {
         List<Client> clients = new ArrayList<>();
-        clients.add(clientRepository.findOne(Long.valueOf(1)));
-        clients.add(clientRepository.findOne(Long.valueOf(2)));
+        clients.add(clientRepository.findById(Long.valueOf(1)).get());
+        clients.add(clientRepository.findById(Long.valueOf(2)).get());
 
         Envelope envelope = envelopeRepository.findByName("EMS");
 

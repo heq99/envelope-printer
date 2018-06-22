@@ -14,6 +14,7 @@ import qiang.envelope.printer.repositories.EnvelopeRepository;
 import qiang.envelope.printer.services.PrintEnvelopeService;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Qiang on 26/11/2016.
@@ -46,6 +47,9 @@ public class PrintEnvelopeController {
             headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
             return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
         } catch (DocumentException e) {
+            logger.error("Error when generating the printing file", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        } catch (IOException e) {
             logger.error("Error when generating the printing file", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
